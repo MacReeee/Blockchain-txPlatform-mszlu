@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/zeromicro/go-zero/core/logx"
 	"grpc-common/ucenter/types/register"
 
 	"github.com/zeromicro/go-zero/core/conf"
@@ -19,6 +20,8 @@ var configFile = flag.String("f", "etc/config.yaml", "the config file")
 
 func main() {
 	flag.Parse()
+
+	logx.MustSetup(logx.LogConf{Stat: false, Encoding: "plain"})
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
