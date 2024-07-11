@@ -1,0 +1,21 @@
+# 操作系统临时文件
+.DS_Store
+Thumbs.db
+
+# 编辑器和IDE临时文件
+.vscode/
+*.swp
+*.swo
+
+# 语言或框架特定的临时文件或目录
+__pycache__/
+node_modules/
+
+# 构建产物目录
+/dist
+/build
+
+# 日志文件和数据库文件
+*.log
+*.sql
+*.sqlite

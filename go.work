@@ -1,0 +1,8 @@
+go 1.22
+
+use (
+	./mscoin-common
+	./grpc-common
+	./ucenter
+	./ucenter-api
+)
