@@ -23,7 +23,6 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 func (l *RegisterLogic) RegisterByPhone(in *register.RegReq) (*register.RegRes, error) {
-	// todo: add your logic here and delete this line
-
+	logx.Info("ucenter rpc register by phone called...")
 	return &register.RegRes{}, nil
 }

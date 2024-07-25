@@ -19,6 +19,7 @@ func main() {
 	flag.Parse()
 
 	logx.MustSetup(logx.LogConf{Stat: false, Encoding: "plain"})
+
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 

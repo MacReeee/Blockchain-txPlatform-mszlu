@@ -1,8 +1,8 @@
-go 1.22
+go 1.22.4
 
 use (
-	./mscoin-common
 	./grpc-common
+	./mscoin-common
 	./ucenter
 	./ucenter-api
 )
