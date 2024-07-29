@@ -15,9 +15,12 @@ type (
 	CaptchaReq = register.CaptchaReq
 	RegReq     = register.RegReq
 	RegRes     = register.RegRes
+	CodeReq    = register.CodeReq
+	NoRes      = register.NoRes
 
 	Register interface {
 		RegisterByPhone(ctx context.Context, in *RegReq, opts ...grpc.CallOption) (*RegRes, error)
+		SendCode(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*NoRes, error)
 	}
 
 	defaultRegister struct {
@@ -34,4 +37,9 @@ func NewRegister(cli zrpc.Client) Register {
 func (m *defaultRegister) RegisterByPhone(ctx context.Context, in *RegReq, opts ...grpc.CallOption) (*RegRes, error) {
 	client := register.NewRegisterClient(m.cli.Conn())
 	return client.RegisterByPhone(ctx, in, opts...)
+}
+
+func (m *defaultRegister) SendCode(ctx context.Context, in *CodeReq, opts ...grpc.CallOption) (*NoRes, error) {
+	client := register.NewRegisterClient(m.cli.Conn())
+	return client.SendCode(ctx, in, opts...)
 }
