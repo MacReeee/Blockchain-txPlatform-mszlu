@@ -3,6 +3,7 @@ module ucenter
 go 1.22
 
 require (
+	github.com/pkg/errors v0.9.1
 	github.com/zeromicro/go-zero v1.6.6
 	google.golang.org/grpc v1.65.0
 	gorm.io/driver/mysql v1.5.7
