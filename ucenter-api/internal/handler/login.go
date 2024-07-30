@@ -39,3 +39,12 @@ func (h *LoginHandler) Login(w http.ResponseWriter, r *http.Request) {
 	res := NewRes.Deal(resp, err)
 	httpx.OkJsonCtx(r.Context(), w, res)
 }
+
+func (h *LoginHandler) CheckLogin(w http.ResponseWriter, r *http.Request) {
+	NewRes := common.NewResult()
+	token := r.Header.Get("x-auth-token")
+	l := logic.NewLoginLogic(r.Context(), h.svcCtx)
+	resp, err := l.CheckLogin(token)
+	res := NewRes.Deal(resp, err)
+	httpx.OkJsonCtx(r.Context(), w, res)
+}
