@@ -12,3 +12,6 @@ CacheRedis:
 Captcha:
   vid: 668fa929d3784602950e9511
   key: 4f311bc7c7374d64bb3443ebf5c10b52
+JWT:
+  AccessSecret: "MacReeee@github.com"
+  AccessExpire: 604800

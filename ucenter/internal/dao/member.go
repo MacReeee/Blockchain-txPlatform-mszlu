@@ -12,6 +12,12 @@ type MemberDao struct {
 	conn *gorms.GormConn
 }
 
+func (m *MemberDao) UpdateLoginCount(ctx context.Context, id int64, step int) error {
+	session := m.conn.Session(ctx)
+	err := session.Exec("update member set login_count = login_count+? where id=?", step, id).Error
+	return err
+}
+
 func (m *MemberDao) Save(ctx context.Context, mem *model.Member) error {
 	session := m.conn.Session(ctx)
 	err := session.Save(mem).Error

@@ -110,6 +110,19 @@ func (m *Member) MemberLevelStr() string {
 	return ""
 }
 
+func (m *Member) MemberRate() int32 {
+	if m.SuperPartner == NORMALPARTER {
+		return 0
+	}
+	if m.SuperPartner == SUPERPARTER {
+		return 1
+	}
+	if m.SuperPartner == PSUPERPARTER {
+		return 2
+	}
+	return 0
+}
+
 func NewMember() *Member {
 	return &Member{}
 }

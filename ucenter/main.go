@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/logx"
+	"grpc-common/ucenter/types/login"
 	"grpc-common/ucenter/types/register"
 
 	"github.com/zeromicro/go-zero/core/conf"
@@ -29,6 +30,7 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		register.RegisterRegisterServer(grpcServer, server.NewRegisterServer(ctx))
+		login.RegisterLoginServer(grpcServer, server.NewLoginServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

@@ -14,9 +14,15 @@ type CqptchaConf struct {
 	Key string
 }
 
+type AuthConfig struct {
+	AccessSecret string
+	AccessExpire int64
+}
+
 type Config struct {
 	zrpc.RpcServerConf
 	Mysql      MysqlConfig
 	CacheRedis cache.CacheConf
 	Captcha    CqptchaConf
+	JWT        AuthConfig
 }
