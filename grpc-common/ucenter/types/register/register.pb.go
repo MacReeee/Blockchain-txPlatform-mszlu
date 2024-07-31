@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.34.2
 // 	protoc        v3.19.4
-// source: register.proto
+// source: rate
 
 package register
 

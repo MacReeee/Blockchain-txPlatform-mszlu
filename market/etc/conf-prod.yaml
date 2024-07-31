@@ -1,0 +1,16 @@
+Name: market.rpc
+ListenOn: 0.0.0.0:8082
+Etcd:
+  Hosts:
+  - mscoin-etcd3-hs.mscoin.svc.cluster.local:2379
+  Key: market.rpc
+Mysql:
+  DataSource: root:root@tcp(mscoin-mysql-headless.mscoin.svc.cluster.local:3306)/mscoin?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+CacheRedis:
+  - Host: mscoin-redis-hs.mscoin.svc.cluster.local:6379
+    Type: node
+Mongo:
+  Url: "mongodb://mscoin-mongo-hs.mscoin.svc.cluster.local:27017"
+  Username: "root"
+  Password: "root123456"
+  DataBase: "mscoin"

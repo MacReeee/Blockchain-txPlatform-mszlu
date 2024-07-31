@@ -1,0 +1,14 @@
+Name: market-api
+Host: 0.0.0.0
+Port: 8889
+Prefix: "/market"
+MarketRpc:
+  Etcd:
+    Hosts:
+      - mscoin-etcd3-hs.mscoin.svc.cluster.local:2379
+    Key: market.rpc
+Kafka:
+  Addr: mscoin-kafka-hs.mscoin.svc.cluster.local:9092
+  WriteCap: 100
+  ReadCap: 100
+  ConsumerGroup: "kline1m-thumb-consumer"

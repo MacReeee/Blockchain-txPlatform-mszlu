@@ -1,5 +1,5 @@
 Name: ucenter-api
-Host: 0.0.0.0
+Host: 172.17.0.1
 Port: 8888
 UCenterRpc:
   Etcd:

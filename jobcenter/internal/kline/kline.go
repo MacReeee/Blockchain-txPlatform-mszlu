@@ -28,6 +28,7 @@ type Kline struct {
 	wg          sync.WaitGroup
 	c           OkxConfig
 	klineDomain *domain.KlineDomain
+	queueDomain *domain.QueueDomain
 }
 
 func (k *Kline) Do(period string) {
@@ -63,14 +64,20 @@ func (k *Kline) getKlineData(instId, symbol, period string) {
 	log.Println("============执行存储mongo==============")
 	if res.Code == "0" {
 		k.klineDomain.SaveBatch(res.Data, symbol, period)
+		if period == "1m" {
+			if len(res.Data) > 0 {
+				k.queueDomain.Send1mKline(res.Data[0], symbol)
+			}
+		}
 	}
 	log.Println("============End==============")
 	k.wg.Done()
 }
 
-func NewKline(c OkxConfig, client *database.MongoClient) *Kline {
+func NewKline(c OkxConfig, mongoCLi *database.MongoClient, kafkaCli *database.KafkaClient) *Kline {
 	return &Kline{
 		c:           c,
-		klineDomain: domain.NewKlineDomain(client),
+		klineDomain: domain.NewKlineDomain(mongoCLi),
+		queueDomain: domain.NewQueueDomain(kafkaCli),
 	}
 }

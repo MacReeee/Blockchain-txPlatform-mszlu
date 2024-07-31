@@ -1,9 +1,11 @@
 go 1.22.4
 
 use (
-	./grpc-common
 	./common
+	./grpc-common
+	./market-api
 	./ucenter
 	./ucenter-api
 	jobcenter
+	market
 )
