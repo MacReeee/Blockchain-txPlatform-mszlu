@@ -45,3 +45,16 @@ services:
     ports:
       - ${ETCD_PORT}:2379
       - 2380:2380
+  mongo:
+    image: mongo:4.2.1
+    restart: always
+    container_name: mongo
+    ports:
+      - 27018:27017
+    volumes:
+      - ${MONGO_DIR}/db:/data/db # 挂载数据目录
+      - ${MONGO_DIR}/log:/var/log/mongodb  # 挂载日志目录
+    privileged: true  # 设置容器的权限为root
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root  # 账号
+      MONGO_INITDB_ROOT_PASSWORD: root123456

@@ -1,11 +1,6 @@
-Name: ucenter-api
-Host: 0.0.0.0
-Port: 8888
-UCenterRpc:
-  Etcd:
-    Hosts:
-      - 127.0.0.1:2379
-    Key: ucenter.rpc
-JWT:
-  AccessSecret: "MacReeee@github.com"
-  AccessExpire: 604800
+Okx:
+  ApiKey: "0bdd043d-aeee-443c-83a9-48e4712ddc54"
+  SecretKey: "8F61D46421A57599A5CAFD26D17D5BE0"
+  Pass: "MacReeee1@github.com"
+  Host: "https://www.okx.com"
+  Proxy: "http://localhost:7890"

@@ -13,9 +13,8 @@ type OkxConfig struct {
 	SecretKey string
 	Pass      string
 	Host      string
+	Proxy     string
 }
-
-var secretKey = "8F61D46421A57599A5CAFD26D17D5BE0"
 
 type OkxResult struct {
 	Code string     `json:"code"`
@@ -25,26 +24,27 @@ type OkxResult struct {
 
 type Kline struct {
 	wg sync.WaitGroup
+	c  OkxConfig
 }
 
 func (k *Kline) Do(period string) {
 	k.wg.Add(2)
-	k.getKlineData("BTC-USDT", period)
-	k.getKlineData("ETH-USDT", period)
+	go k.getKlineData("BTC-USDT", period)
+	go k.getKlineData("ETH-USDT", period)
 	k.wg.Wait()
 }
 
 func (k *Kline) getKlineData(instId string, period string) {
 	//获取数据
-	api := "https://www.okx.com/api/v5/market/candles?instId=" + instId + "&bar=" + period
+	api := k.c.Host + "/api/v5/market/candles?instId=" + instId + "&bar=" + period
 	timestamp := tools.ISO(time.Now())
-	sign := tools.ComputeHmacSha256(timestamp+"GET/api/v5/market/candles?instId="+instId+"&bar="+period, secretKey)
+	sign := tools.ComputeHmacSha256(timestamp+"GET/api/v5/market/candles?instId="+instId+"&bar="+period, k.c.SecretKey)
 	header := make(map[string]string)
-	header["OK-ACCESS-KEY"] = "d5a748c6-214d-4fae-bef3-d32368ecbbe8"
+	header["OK-ACCESS-KEY"] = k.c.ApiKey
 	header["OK-ACCESS-SIGN"] = sign
 	header["OK-ACCESS-TIMESTAMP"] = timestamp
-	header["OK-ACCESS-PASSPHRASE"] = "MacReeee1@github.com"
-	resp, err := tools.GetWithHeader(api, header, "http://localhost:7890")
+	header["OK-ACCESS-PASSPHRASE"] = k.c.Pass
+	resp, err := tools.GetWithHeader(api, header, k.c.Proxy)
 	if err != nil {
 		log.Println(err)
 		k.wg.Done()
@@ -64,6 +64,8 @@ func (k *Kline) getKlineData(instId string, period string) {
 	k.wg.Done()
 }
 
-func NewKline() *Kline {
-	return &Kline{}
+func NewKline(c OkxConfig) *Kline {
+	return &Kline{
+		c: c,
+	}
 }
