@@ -28,6 +28,7 @@ func main() {
 		<-exit
 		log.Println("监听到中断信号，终止程序")
 		t.Stop()
+		ctx.MongoClient.Disconnect()
 	}()
 	t.StartBlocking()
 }

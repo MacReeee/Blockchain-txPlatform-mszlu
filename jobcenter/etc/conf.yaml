@@ -4,3 +4,8 @@ Okx:
   Pass: "MacReeee1@github.com"
   Host: "https://www.okx.com"
   Proxy: "http://localhost:7890"
+Mongo:
+  Url: "mongodb://localhost:27018"
+  Username: "root"
+  Password: "root123456"
+  DataBase: "mscoin"

@@ -3,6 +3,8 @@ package kline
 import (
 	"common/tools"
 	"encoding/json"
+	"jobcenter/internal/database"
+	"jobcenter/internal/domain"
 	"log"
 	"sync"
 	"time"
@@ -23,18 +25,19 @@ type OkxResult struct {
 }
 
 type Kline struct {
-	wg sync.WaitGroup
-	c  OkxConfig
+	wg          sync.WaitGroup
+	c           OkxConfig
+	klineDomain *domain.KlineDomain
 }
 
 func (k *Kline) Do(period string) {
 	k.wg.Add(2)
-	go k.getKlineData("BTC-USDT", period)
-	go k.getKlineData("ETH-USDT", period)
+	go k.getKlineData("BTC-USDT", "BTC/USDT", period)
+	go k.getKlineData("ETH-USDT", "ETH/USDT", period)
 	k.wg.Wait()
 }
 
-func (k *Kline) getKlineData(instId string, period string) {
+func (k *Kline) getKlineData(instId, symbol, period string) {
 	//获取数据
 	api := k.c.Host + "/api/v5/market/candles?instId=" + instId + "&bar=" + period
 	timestamp := tools.ISO(time.Now())
@@ -57,15 +60,17 @@ func (k *Kline) getKlineData(instId string, period string) {
 		k.wg.Done()
 		return
 	}
-	log.Println("============获取到的k线数据==============")
-	log.Println("instId: ", instId, "period: ", period)
-	log.Println("result kline data: ", string(resp))
+	log.Println("============执行存储mongo==============")
+	if res.Code == "0" {
+		k.klineDomain.SaveBatch(res.Data, symbol, period)
+	}
 	log.Println("============End==============")
 	k.wg.Done()
 }
 
-func NewKline(c OkxConfig) *Kline {
+func NewKline(c OkxConfig, client *database.MongoClient) *Kline {
 	return &Kline{
-		c: c,
+		c:           c,
+		klineDomain: domain.NewKlineDomain(client),
 	}
 }
