@@ -6,7 +6,6 @@ package server
 import (
 	"context"
 	"grpc-common/ucenter/types/register"
-
 	"ucenter/internal/logic"
 	"ucenter/internal/svc"
 )

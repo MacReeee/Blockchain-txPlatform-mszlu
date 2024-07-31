@@ -8,4 +8,6 @@ use (
 	./ucenter-api
 	jobcenter
 	market
+	exchange
+	exchange-api
 )

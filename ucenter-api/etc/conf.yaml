@@ -1,11 +1,16 @@
 Name: ucenter-api
-Host: 172.17.0.1
+Host: 0.0.0.0
 Port: 8888
 UCenterRpc:
   Etcd:
     Hosts:
       - 127.0.0.1:2379
     Key: ucenter.rpc
+MarketRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: market.rpc
 JWT:
   AccessSecret: "MacReeee@github.com"
   AccessExpire: 604800

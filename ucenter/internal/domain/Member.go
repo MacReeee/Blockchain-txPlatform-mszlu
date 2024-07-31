@@ -60,6 +60,14 @@ func (d *MemberDomain) UpdateLoginCount(ctx context.Context, id int64, step int)
 	}
 }
 
+func (d *MemberDomain) FindMemberById(ctx context.Context, memberId int64) (*model.Member, error) {
+	id, err := d.memberRepo.FindMemberById(ctx, memberId)
+	if err == nil && id == nil {
+		return nil, errors.New("用户不存在")
+	}
+	return id, err
+}
+
 func NewMemberDomain(db *msdb.MsDB) *MemberDomain {
 	return &MemberDomain{
 		memberRepo: dao.NewMemberDao(db),

@@ -5,13 +5,13 @@ import (
 	"github.com/zeromicro/go-zero/zrpc"
 )
 
-type AuthConfig struct {
-	AccessSecret string
-	AccessExpire int64
-}
-
 type Config struct {
 	rest.RestConf
 	UCenterRpc zrpc.RpcClientConf
+	MarketRpc  zrpc.RpcClientConf
 	JWT        AuthConfig
+}
+type AuthConfig struct {
+	AccessSecret string
+	AccessExpire int64
 }

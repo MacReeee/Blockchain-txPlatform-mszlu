@@ -12,6 +12,15 @@ type MemberDao struct {
 	conn *gorms.GormConn
 }
 
+func (m *MemberDao) FindMemberById(ctx context.Context, memberId int64) (mem *model.Member, err error) {
+	session := m.conn.Session(ctx)
+	err = session.Model(&model.Member{}).Where("id=?", memberId).Take(&mem).Error
+	if err != nil && err == gorm.ErrRecordNotFound {
+		return nil, nil
+	}
+	return
+}
+
 func (m *MemberDao) UpdateLoginCount(ctx context.Context, id int64, step int) error {
 	session := m.conn.Session(ctx)
 	err := session.Exec("update member set login_count = login_count+? where id=?", step, id).Error

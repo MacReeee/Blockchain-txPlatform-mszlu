@@ -1,5 +1,5 @@
 Name: market-api
-Host: 172.17.0.1
+Host: 0.0.0.0
 Port: 8889
 Prefix: "/market"
 MarketRpc:

@@ -3,6 +3,7 @@ module market
 go 1.19
 
 require (
+	github.com/jinzhu/copier v0.4.0
 	github.com/zeromicro/go-zero v1.5.0
 	go.mongodb.org/mongo-driver v1.11.2
 	google.golang.org/grpc v1.53.0
