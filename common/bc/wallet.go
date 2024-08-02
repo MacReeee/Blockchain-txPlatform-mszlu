@@ -45,7 +45,7 @@ func newKeyPair() (ecdsa.PrivateKey, []byte, error) {
 	if err != nil {
 		return *privateKey, nil, err
 	}
-	////序列化私钥
+	//序列化私钥
 	//marshalECPrivateKey, _ := x509.MarshalECPrivateKey(privateKey)
 	//fmt.Println(string(Base58Encode(marshalECPrivateKey)))
 	//2.通过私钥生成公钥

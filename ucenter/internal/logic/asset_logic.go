@@ -59,7 +59,7 @@ func (l *AssetLogic) ResetAddress(req *asset.AssetReq) (*asset.AssetResp, error)
 		return nil, err
 	}
 	if req.CoinName == "BTC" {
-		if memberWallet.Address == "" {
+		if len(memberWallet.Address) <= 10 || memberWallet.Address == "" {
 			wallet, err := bc.NewWallet()
 			if err != nil {
 				return nil, err

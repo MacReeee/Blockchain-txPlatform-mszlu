@@ -6,6 +6,7 @@ import (
 	"context"
 	"exchange/internal/model"
 	"gorm.io/gorm"
+	"log"
 )
 
 type ExchangeOrderDao struct {
@@ -28,6 +29,9 @@ func (e *ExchangeOrderDao) FindOrderListBySymbol(ctx context.Context, symbol str
 	session := e.conn.Session(ctx)
 	err = session.Model(&model.ExchangeOrder{}).
 		Where("symbol=? and status=?", symbol, status).Find(&list).Error
+	if err != nil {
+		log.Println(err)
+	}
 	return
 }
 

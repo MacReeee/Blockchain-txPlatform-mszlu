@@ -45,6 +45,7 @@ func (d MemberDomain) Register(ctx context.Context,
 	mem.MemberLevel = model.GENERAL
 	mem.Salt = salt
 	mem.Avatar = "https://avatars.githubusercontent.com/u/54505023?s=400&u=965ad764e3376feb406d986a4c679aa62b9dafcb&v=4"
+	mem.TransactionStatus = 1
 	err := d.memberRepo.Save(ctx, mem)
 	if err != nil {
 		logx.Error(err)

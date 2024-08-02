@@ -13,3 +13,13 @@ Kafka:
   Addr: localhost:9092
   WriteCap: 100
   ReadCap: 100
+CacheRedis:
+  - Host: 127.0.0.1:6379
+    Type: node
+UCenterRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: ucenter.rpc
+Bitcoin:
+  Address: http://127.0.0.1:18332

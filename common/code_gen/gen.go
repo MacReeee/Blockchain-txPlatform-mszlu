@@ -13,11 +13,11 @@ import (
 
 func connectMysql() *gorm.DB {
 	//配置MySQL连接参数
-	username := "root"  //账号
-	password := "root"  //密码
-	host := "127.0.0.1" //数据库地址，可以是Ip或者域名
-	port := 3309        //数据库端口
-	Dbname := "mscoin"  //数据库名
+	username := "root"    //账号
+	password := "root"    //密码
+	host := "127.0.0.1"   //数据库地址，可以是Ip或者域名
+	port := 3309          //数据库端口
+	Dbname := "zero_mall" //数据库名
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", username, password, host, port, Dbname)
 	var err error
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{

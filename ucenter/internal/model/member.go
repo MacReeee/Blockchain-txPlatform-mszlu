@@ -2,7 +2,7 @@ package model
 
 type Member struct {
 	Id                         int64   `gorm:"column:id"`
-	AliNo                      string  `gorm:"column:ali_no"`
+	AliNo                      string  `gorm:"column:ali_no" default:"0"`
 	QrCodeUrl                  string  `gorm:"column:qr_code_url"`
 	AppealSuccessTimes         int64   `gorm:"column:appeal_success_times"`
 	AppealTimes                int64   `gorm:"column:appeal_times"`

@@ -58,17 +58,17 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root  # 账号
       MONGO_INITDB_ROOT_PASSWORD: root123456
-  kafdrop:
-    container_name: kafdrop
-    image: obsidiandynamics/kafdrop
-    restart: "no"
-    ports:
-      - "9000:9000"
-    environment:
-      KAFKA_BROKERCONNECT: "kafka:29092"
-      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
-    depends_on:
-      - "kafka"
+#  kafdrop:
+#    container_name: kafdrop
+#    image: obsidiandynamics/kafdrop
+#    restart: "no"
+#    ports:
+#      - "9000:9000"
+#    environment:
+#      KAFKA_BROKERCONNECT: "kafka:29092"
+#      JVM_OPTS: "-Xms16M -Xmx48M -Xss180K -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify"
+#    depends_on:
+#      - "kafka"
   kafka:
     container_name: kafka
     image: obsidiandynamics/kafka
